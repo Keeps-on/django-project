@@ -5,7 +5,12 @@ import sys
 
 
 def main():
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'xOps.settings')
+    # 项目初始化的配置
+    # os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'xOps.settings')
+    # 开发环境的配置
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'xOps.settings.dev')
+    # 生成环境的配置
+    # os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'xOps.settings')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
