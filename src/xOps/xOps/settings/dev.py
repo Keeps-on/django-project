@@ -194,7 +194,7 @@ TABASES = {
         'PORT': 3306,  # 数据库端口
         'USER': 'root',  # 数据库用户名
         'PASSWORD': '123456',  # 数据库用户密码
-        'NAME': 'xops'  # 数据库名字
+        'NAME': 'xops_rest'  # 数据库名字
     }
 }
 
