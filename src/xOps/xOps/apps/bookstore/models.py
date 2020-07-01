@@ -34,6 +34,7 @@ class HeroInfo(models.Model):
     is_delete = models.BooleanField(default=False, verbose_name='删除标记')
     # 关联属性
     hbook = models.ForeignKey('BookInfo', on_delete=models.CASCADE, verbose_name='图书')
+    # hbook = serializers.PrimaryKeyRelatedField(label='图书', queryset=BookInfo.objects.all())
 
     class Meta:
         db_table = 'tb_heros'
