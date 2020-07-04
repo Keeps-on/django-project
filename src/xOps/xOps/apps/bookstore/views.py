@@ -4,7 +4,10 @@ from django.shortcuts import render
 
 
 from rest_framework.viewsets import ModelViewSet
+# 普通的序列化器
 from .serializers import BookInfoSerializer,HeroInfoSerializer
+# 带有保存和更新的序列化器
+from .deserializers import BookInfoSerializer
 from .models import BookInfo,HeroInfo
 
 class BookInfoViewSet(ModelViewSet):

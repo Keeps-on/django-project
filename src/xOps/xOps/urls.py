@@ -19,5 +19,6 @@ from django.urls import path,include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include('bookstore.urls'))
+    path('',include('bookstore.urls')),
+    path('',include('bookstore.api_urls')), # 自定义Rest full
 ]
