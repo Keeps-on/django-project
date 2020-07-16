@@ -59,10 +59,51 @@ from rest_framework.response import Response
 from .models import BookInfo,HeroInfo
 from .serializers import BookInfoSerializer
 
+#############################################
+#            APIView                        #
+#############################################
 class BookListView(APIView):
     
     def get(self,request):
         books = BookInfo.objects.all()
         serializer = BookInfoSerializer(books, many=True)
         return Response(serializer.data)
+
+#############################################
+#            GenericAPIView                 #
+# 提供的重要的属性
+#   serializer_class 指明视图使用的序列化器
+# 提供属性对应的方法
+#   get_serializer_class(self)
+#   返回值：
+#       返回序列化器:默认返回serializer_class
+#       重写
+#   def get_serializer_class(self):
+#     if self.request.user.is_staff:
+#         return FullAccountSerializer
+#     return BasicAccountSerializer
+#   返回序列化器对象，主要用来提供给Mixin扩展类使用，如果我们在视图中想要获取序列化器对象，也可以直接调用此方法。
+#   get_serializer(self, args, *kwargs)
+#   注意，该方法在提供序列化器对象的时候，会向序列化器对象的context属性补充三个数据：
+#   request、format、view，这三个数据对象可以在定义序列化器时使用。 
+#       request 当前视图的请求对象
+#       view 当前请求的类视图对象
+#       format 当前请求期望返回的数据格式
+#   提供关于数据库查询的属性与方法
+#       属性
+#           queryset 指明使用的数据查询集
+#       方法
+#           get_queryset(self)
+#           返回视图使用的查询集，
+#           主要用来提供给Mixin扩展类使用，
+#           是列表视图与详情视图获取数据的基础，默认返回queryset属性，可以重写，例如：
+#       def get_queryset(self):
+#           user = self.request.user
+#           return user.accounts.all()
+#       
+#############################################
+
+
+
+
 
