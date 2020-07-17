@@ -45,10 +45,6 @@
             库查询方法
             ListModelMixin
 
-
-
-
-
     【注意】：当你去写列表或者详情的时候可以从GenericAPIView继承
 """
 
@@ -65,8 +61,10 @@ from .serializers import BookInfoSerializer
 class BookListView(APIView):
     
     def get(self,request):
+        print('test')
         books = BookInfo.objects.all()
         serializer = BookInfoSerializer(books, many=True)
+        print('---------------')
         return Response(serializer.data)
 
 #############################################
@@ -104,6 +102,32 @@ class BookListView(APIView):
 #############################################
 
 
+from rest_framework.generics import GenericAPIView
 
+class BookDetailView(GenericAPIView):
+    queryset = BookInfo.objects.all()  # 获取全部的queryset
+    serializer_class = BookInfoSerializer # 获取序列化器
+
+    def get(self,request,pk):
+        print(pk)
+        book = self.get_object()
+        serializer = self.get_serializer(book) # 返回的是序列化对象
+
+        
+"""
+补充说明：
+创建序列化的步骤:
+    1. 获取QuerySet的对象
+    2. 创建序列化类
+    3. 获取对象
+示例代码：
+python manage.py shell
+
+from bookstore.models import * 
+from bookstore.serializers import BookInfoSerializer
+book = BookInfo.objects.get(id=1)
+serializer = BookInfoSerializer(book)
+serializer.data
+"""
 
 
