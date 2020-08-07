@@ -9,10 +9,13 @@ from .serializers import BookInfoSerializer,HeroInfoSerializer
 # 带有保存和更新的序列化器
 from .deserializers import BookInfoSerializer
 from .models import BookInfo,HeroInfo
-
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
 class BookInfoViewSet(ModelViewSet):
     queryset = BookInfo.objects.all()
     serializer_class = BookInfoSerializer
+    # authentication_classes = (SessionAuthentication,BasicAuthentication)
+    # permission_classes = (IsAuthenticated,)
 
 
 class HeroInfoViewSet(ModelViewSet):

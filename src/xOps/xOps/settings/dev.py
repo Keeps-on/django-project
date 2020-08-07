@@ -109,6 +109,7 @@ import sys
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+print(BASE_DIR)
 # print(BASE_DIR)
 sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 
@@ -124,6 +125,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -134,7 +136,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'bookstore'
+    'bookstore',
+    'mail'
 
 ]
 
@@ -153,7 +156,7 @@ ROOT_URLCONF = 'xOps.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -327,6 +330,34 @@ EST_FRAMEWORK = {
 
 
 
+############################################
+#                邮箱的配置                 #
+############################################
+# 发送邮件设置
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# SMTP地址
+EMAIL_HOST = 'smtp.qq.com'
+# SMTP端口
+EMAIL_PORT = 465
+# 自己的邮箱
+EMAIL_HOST_USER = '1299793997@qq.com'
+# 自己的邮箱授权码，非密码
+EMAIL_HOST_PASSWORD = 'mrxuawndjctfjhei'
+EMAIL_SUBJECT_PREFIX = '[邮件测试]'
+# 与SMTP服务器通信时，是否启动TLS链接(安全链接)。默认是false
+
+
+REST_FRAMEWORK = {
+    # 基本的认证信息
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',   # 基本认证
+        'rest_framework.authentication.SessionAuthentication',  # session认证
+    ),
+    # 权限的
+    # 'DEFAULT_PERMISSION_CLASSES': (
+    #     'rest_framework.permissions.IsAuthenticated',
+    # )
+}
 
 
 

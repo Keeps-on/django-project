@@ -58,13 +58,14 @@ from .serializers import BookInfoSerializer
 #############################################
 #            APIView                        #
 #############################################
+
 class BookListView(APIView):
     
     def get(self,request):
-        print('test')
+
         books = BookInfo.objects.all()
         serializer = BookInfoSerializer(books, many=True)
-        print('---------------')
+
         return Response(serializer.data)
 
 #############################################
@@ -103,15 +104,18 @@ class BookListView(APIView):
 
 
 from rest_framework.generics import GenericAPIView
+from rest_framework.permissions import IsAuthenticated # 表示只有经过认证的用户才能访问
 
 class BookDetailView(GenericAPIView):
     queryset = BookInfo.objects.all()  # 获取全部的queryset
     serializer_class = BookInfoSerializer # 获取序列化器
+    permissoin_classes = [IsAuthenticated] # 可以使用元组或者列表
 
     def get(self,request,pk):
         print(pk)
         book = self.get_object()
         serializer = self.get_serializer(book) # 返回的是序列化对象
+        return Response(serializer.data)
 
         
 """
